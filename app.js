@@ -1,6 +1,6 @@
-let music = new Audio('music.mp3')
-let audioTurn = new Audio('ting.mp3')
-let gameOver = new Audio('gameover.mp3')
+let music = new Audio('Elements/music.mp3')
+let audioTurn = new Audio('Elements/ting.mp3')
+let gameOver = new Audio('Elements/gameover.mp3')
 let isGameOver = false;
 
 let turn = 'X'
@@ -29,6 +29,7 @@ const checkWin = () => {
         if ((boxText[e[0]].innerText === boxText[e[1]].innerText) && (boxText[e[2]].innerText === boxText[e[1]].innerText) && (boxText[e[0]].innerText !== '')) {
             document.querySelector('.info').innerText = boxText[e[0]].innerText + ' Won';
             isGameOver = true
+            gameOver.play()
             document.querySelector('.imgBox').getElementsByTagName('img')[0].style.width = '200px'
             document.querySelector('.line').style.width = '26vw'
             document.querySelector('.line').style.transform = `translate(${e[3]}vw, ${e[4]}vw) rotate(${e[5]}deg)`
@@ -44,6 +45,7 @@ Array.from(boxes).forEach(element => {
         if (boxText.innerText === '') {
             boxText.innerText = turn;
             turn = changeTurn();
+            music.play();
             audioTurn.play();
             checkWin();
             if (!isGameOver) {
